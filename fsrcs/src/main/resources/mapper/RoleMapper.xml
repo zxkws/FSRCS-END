@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.wbu.fsrcs.dao.RoleDao">
+    <resultMap id="RoleBean" type="edu.wbu.fsrcs.entity.Role">
+        <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+        <result column="role" property="role" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="available" property="available" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="queryAllRole" resultMap="RoleBean">
+        select * from role
+    </select>
+    <select id="queryRoleIdByRole" parameterType="edu.wbu.fsrcs.entity.Role" resultMap="RoleBean">
+        SELECT * from role where description = #{role}
+    </select>
+    <insert id="add" parameterType="edu.wbu.fsrcs.entity.Role">
+        insert into role(role_id,role,description,available)
+        values (#{roleId},#{role},#{description},#{available})
+    </insert>
+    <update id="update" parameterType="edu.wbu.fsrcs.entity.Role">
+        update role set available = 1
+        <if test="role != null and role != ''">
+            ,role=#{role}
+        </if>
+        <if test="description != null and description != ''">
+            ,description=#{description}
+        </if>
+        <if test="permissions != null and permissions != ''">
+            ,permissions = #{permissions}
+        </if>
+        where role_id = #{roleId}
+    </update>
+    <delete id="delete" parameterType="edu.wbu.fsrcs.entity.Role">
+        delete from role where role_id = #{roleId}
+    </delete>
+    <delete id="deleteRoleAndPermissions" parameterType="edu.wbu.fsrcs.entity.Role">
+        delete from role_permission where role_id = #{roleId}
+    </delete>
+
+    <insert id="insertRoleAndPermissions">
+        insert into role_permission(role_id, permission_id) values (#{roleId},#{permissionId})
+    </insert>
+</mapper>
