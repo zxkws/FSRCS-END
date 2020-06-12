@@ -7,7 +7,11 @@
     <groupId>edu.guat</groupId>
     <artifactId>FSRCS</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <!--<version>1.0-SNAPSHOT</version>-->
+    <properties>
+        <tempversion>1.0.3</tempversion>
+    </properties>
+    <version>${tempversion}</version>
     <modules>
         <module>fsrcs-common</module>
     </modules>
