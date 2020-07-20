@@ -1,6 +1,8 @@
 package edu.wbu.fsrcs.dao;
 
 import edu.wbu.fsrcs.entity.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserDao {
@@ -9,7 +11,7 @@ public interface UserDao {
      * 查询用户
      * @return
      */
-    User queryUser(String username, String password);
+    User queryUser(@Param("username") String username, @Param("password") String password);
 
     /**
      * 查询所有用户
@@ -22,14 +24,14 @@ public interface UserDao {
      * @param userId
      * @return
      */
-    User queryUserById(String userId);
+    User queryUserById(@Param("userId") String userId);
 
     /**
      * 通过username查询用户
      * @param username
      * @return
      */
-    User queryUserByUsername(String username);
+    User queryUserByUsername(@Param("username") String username);
     /**
      * 新建用户
      * @param user

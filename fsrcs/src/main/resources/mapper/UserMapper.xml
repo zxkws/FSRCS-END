@@ -12,23 +12,23 @@
         <result column="physician_license" property="physicianLicense" jdbcType="VARCHAR" />
     </resultMap>
     <select id="queryUser" resultMap="UserBean">
-        SELECT * from User where username = #{username} and password = #{password}
+        SELECT * from user where username = #{username} and password = #{password}
     </select>
     <select id="queryAllUser" resultMap="UserBean">
-        select * from User
+        select * from user
     </select>
     <select id="queryUserById" resultMap="UserBean">
-        SELECT * from User where user_id = #{userId}
+        SELECT * from user where user_id = #{userId}
     </select>
     <select id="queryUserByUsername" resultMap="UserBean">
-        SELECT * from User where username = #{username}
+        SELECT * from user where username = #{username}
     </select>
     <insert id="addUser" parameterType="edu.wbu.fsrcs.entity.User">
-        insert into User(user_id,username,password,nick_name,create_date,update_date,user_flag,account_status,physician_license)
+        insert into user(user_id,username,password,nick_name,create_date,update_date,user_flag,account_status,physician_license)
         values (#{userId},#{username},#{password},#{nickName},#{createDate},#{updateDate},#{userFlag},#{accountStatus},#{physicianLicense})
     </insert>
     <update id="updateUser" parameterType="edu.wbu.fsrcs.entity.User">
-        update User set update_date = #{updateDate}
+        update user set update_date = #{updateDate}
         <if test="password != null and password != ''">
             ,password=#{password}
         </if>
