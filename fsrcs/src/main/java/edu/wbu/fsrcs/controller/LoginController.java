@@ -7,6 +7,7 @@ import edu.wbu.fsrcs.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,5 +76,12 @@ public class LoginController {
         }
 
         return new Result(ResultCode.FAIL);
+    }
+
+    @PostMapping("/logout")
+    public Result logout(){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return new Result(ResultCode.SUCCESS);
     }
 }
